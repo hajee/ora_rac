@@ -6,21 +6,21 @@ class ora_rac::iptables inherits ora_rac::params
 
   $all_ip_addresses.each |$ipadress| {
     firewall{"200 RAC communication for ${ipadress}":
-      chain   => $input_chain,
-      source  => $ipadress,
-      action  => 'accept',
+      chain  => $input_chain,
+      source => $ipadress,
+      action => 'accept',
     }
   }
 
   firewall { '200 DB listner':
-    chain   => $input_chain,
-    port   => 1521,
+    chain  => $input_chain,
+    dport  => 1521,
     proto  => tcp,
     action => 'accept',
   }
   firewall { '200 DB gridcontrol':
-    chain   => $input_chain,
-    port   => 3872,
+    chain  => $input_chain,
+    dport  => 3872,
     proto  => tcp,
     action => 'accept',
   }
